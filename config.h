@@ -2,15 +2,12 @@
 static const Block blocks[] = {
 	/*Icon*/	/*Command*/		/*Update Interval*/	/*Update Signal*/
 	{"", "cat /tmp/recordingicon 2>/dev/null",	0,	9},
-	{"",	"sb-tasks",	10,	26},
-	/* {"",	"sb-music",	0,	11}, */
-	{"",	"sb-pacpackages",	0,	8},
-	{"",	"sb-news",		0,	6},
-	{"",	"sb-mailbox",	180,	12},
+	{"",	"sb-brightness",0,	9},
 	{"",	"sb-volume",	0,	10},
 	{"",	"sb-battery",	5,	3},
 	{"",	"sb-clock",	60,	1},
 	{"",	"sb-internet",	5,	4},
+	{"",	"sb-sysact",	0,	0},
 };
 
 //Sets delimiter between status commands. NULL character ('\0') means no delimiter.
