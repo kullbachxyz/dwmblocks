@@ -3,7 +3,7 @@
 btn="${BLOCK_BUTTON:-$BUTTON}"
 if [ -n "$btn" ]; then
 	case "$btn" in
-		1|2) setsid -f "$TERMINAL" -e battop ;;
+		1|2) setsid -f "$TERMINAL" -e sh -c 'watch -n 1 acpi -V' ;;
 	esac
 fi
 
