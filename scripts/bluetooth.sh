@@ -26,14 +26,18 @@ if [ "$powered" != "yes" ]; then
 fi
 
 connected=0
-set -- $(bluetoothctl paired-devices 2>/dev/null | awk '{print $2}')
-for dev in "$@"; do
-	[ -n "$dev" ] || continue
-	if bluetoothctl info "$dev" 2>/dev/null | grep -q 'Connected: yes'; then
-		connected=1
-		break
-	fi
-done
+if bluetoothctl devices Connected 2>/dev/null | grep -q '^Device '; then
+	connected=1
+else
+	set -- $(bluetoothctl paired-devices 2>/dev/null | awk '{print $2}')
+	for dev in "$@"; do
+		[ -n "$dev" ] || continue
+		if bluetoothctl info "$dev" 2>/dev/null | grep -q 'Connected: yes'; then
+			connected=1
+			break
+		fi
+	done
+fi
 
 if [ "$connected" -eq 1 ]; then
 	printf '%s' "󰂱"
