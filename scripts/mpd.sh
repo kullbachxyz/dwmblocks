@@ -13,8 +13,8 @@ current="$(mpc -f '%artist% - %title%' current 2>/dev/null)"
 if [ -n "$current" ]; then
 	status="$(mpc status 2>/dev/null | sed -n '2p')"
 	case "$status" in
-		*"[paused]"*) printf '⏸ %s' "$current" ;;
-		*) printf '▶ %s' "$current" ;;
+		*"[paused]"*) printf '󰏤 %s' "$current" ;;
+		*) printf ' %s' "$current" ;;
 	esac
 	exit 0
 fi
@@ -23,15 +23,15 @@ current="$(mpc -f '%file%' current 2>/dev/null)"
 if [ -n "$current" ]; then
 	status="$(mpc status 2>/dev/null | sed -n '2p')"
 	case "$status" in
-		*"[paused]"*) printf '⏸ %s' "$current" ;;
-		*) printf '▶ %s' "$current" ;;
+		*"[paused]"*) printf '󰏤 %s' "$current" ;;
+		*) printf ' %s' "$current" ;;
 	esac
 	exit 0
 fi
 
 status="$(mpc status 2>/dev/null | sed -n '2p')"
 case "$status" in
-	*"[paused]"*) printf '⏸' ;;
-	*"[playing]"*) printf '▶' ;;
+	*"[paused]"*) printf '󰏤' ;;
+	*"[playing]"*) printf '' ;;
 	*) : ;;
 esac
