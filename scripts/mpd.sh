@@ -31,7 +31,7 @@ fi
 
 status="$(mpc status 2>/dev/null | sed -n '2p')"
 case "$status" in
-	*"[paused]"*) printf 'mpd: paused' ;;
-	*"[playing]"*) printf 'mpd: playing' ;;
-	*) printf 'mpd: stopped' ;;
+	*"[paused]"*) printf '⏸' ;;
+	*"[playing]"*) printf '▶' ;;
+	*) : ;;
 esac
