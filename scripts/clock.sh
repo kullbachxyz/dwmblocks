@@ -1,0 +1,10 @@
+#!/bin/sh
+
+btn="${BLOCK_BUTTON:-$BUTTON}"
+if [ -n "$btn" ]; then
+	case "$btn" in
+		1|2) setsid -f "$TERMINAL" -e calcurse ;;
+	esac
+fi
+
+date '+%H:%M'
