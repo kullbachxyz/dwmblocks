@@ -45,4 +45,8 @@ else
 	icon=" "
 fi
 
+if [ "$status" = "Charging" ] || [ "$status" = "Full" ] && [ "$ac_online" = "1" ]; then
+	icon="⚡ "
+fi
+
 printf '%s%s%%' "$icon" "$capacity"
