@@ -1,0 +1,37 @@
+#!/bin/sh
+
+btn="${BLOCK_BUTTON:-$BUTTON}"
+if [ -n "$btn" ]; then
+	case "$btn" in
+		1) mpc toggle >/dev/null 2>&1 ;;
+		2) mpc prev >/dev/null 2>&1 ;;
+		3) mpc next >/dev/null 2>&1 ;;
+	esac
+fi
+
+current="$(mpc -f '%artist% - %title%' current 2>/dev/null)"
+if [ -n "$current" ]; then
+	status="$(mpc status 2>/dev/null | sed -n '2p')"
+	case "$status" in
+		*"[paused]"*) printf '⏸ %s' "$current" ;;
+		*) printf '▶ %s' "$current" ;;
+	esac
+	exit 0
+fi
+
+current="$(mpc -f '%file%' current 2>/dev/null)"
+if [ -n "$current" ]; then
+	status="$(mpc status 2>/dev/null | sed -n '2p')"
+	case "$status" in
+		*"[paused]"*) printf '⏸ %s' "$current" ;;
+		*) printf '▶ %s' "$current" ;;
+	esac
+	exit 0
+fi
+
+status="$(mpc status 2>/dev/null | sed -n '2p')"
+case "$status" in
+	*"[paused]"*) printf 'mpd: paused' ;;
+	*"[playing]"*) printf 'mpd: playing' ;;
+	*) printf 'mpd: stopped' ;;
+esac

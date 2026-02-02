@@ -4,6 +4,7 @@ static const Block blocks[] = {
 	{"", "$HOME/.local/src/dwmblocks/scripts/bluetooth.sh",	5,		1},
 	{"", "$HOME/.local/src/dwmblocks/scripts/network.sh",	5,		2},
 	{"", "$HOME/.local/src/dwmblocks/scripts/battery.sh",	30,		3},
+	{"", "$HOME/.local/src/dwmblocks/scripts/mpd.sh",	5,		5},
 	{"", "$HOME/.local/src/dwmblocks/scripts/clock.sh",	60,		4},
 };
 
