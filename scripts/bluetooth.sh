@@ -16,7 +16,7 @@ fi
 # Fast exit when no Bluetooth adapter exists (common in VMs).
 [ -d /sys/class/bluetooth ] || exit 0
 
-powered=$(timeout 0.3s bluetoothctl show 2>/dev/null | awk -F': ' '/Powered/ {print $2; exit}')
+powered=$(timeout 1s bluetoothctl show 2>/dev/null | awk -F': ' '/Powered/ {print $2; exit}')
 if [ -z "$powered" ]; then
 	# No adapter/controller detected; show "off"
 	printf '%s' "󰂲"
@@ -29,13 +29,13 @@ if [ "$powered" != "yes" ]; then
 fi
 
 connected=0
-if timeout 0.3s bluetoothctl devices Connected 2>/dev/null | grep -q '^Device '; then
+if timeout 1s bluetoothctl devices Connected 2>/dev/null | grep -q '^Device '; then
 	connected=1
 else
-	set -- $(timeout 0.3s bluetoothctl paired-devices 2>/dev/null | awk '{print $2}')
+	set -- $(timeout 1s bluetoothctl paired-devices 2>/dev/null | awk '{print $2}')
 	for dev in "$@"; do
 		[ -n "$dev" ] || continue
-		if timeout 0.3s bluetoothctl info "$dev" 2>/dev/null | grep -q 'Connected: yes'; then
+		if timeout 1s bluetoothctl info "$dev" 2>/dev/null | grep -q 'Connected: yes'; then
 			connected=1
 			break
 		fi
