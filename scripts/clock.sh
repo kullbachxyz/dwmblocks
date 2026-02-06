@@ -7,4 +7,4 @@ if [ -n "$btn" ]; then
 	esac
 fi
 
-date '+%H:%M'
+date '+%a %d %b %H:%M'
