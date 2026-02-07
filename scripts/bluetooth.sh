@@ -19,7 +19,7 @@ fi
 powered=$(timeout 1s bluetoothctl show 2>/dev/null | awk -F': ' '/Powered/ {print $2; exit}')
 if [ -z "$powered" ]; then
 	# No adapter/controller detected; show "off"
-	printf '%s' "󰂲"
+	printf '%s' ""
 	exit 0
 fi
 
