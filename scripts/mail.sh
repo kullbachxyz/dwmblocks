@@ -1,0 +1,12 @@
+#!/bin/sh
+
+MAIL_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/mail"
+
+# Count mail in new/ plus unseen mail in cur/ (no S flag)
+new=$(find "$MAIL_DIR"/*/INBOX/new -type f 2>/dev/null | wc -l)
+unseen=$(find "$MAIL_DIR"/*/INBOX/cur -type f ! -name '*:2,*S*' 2>/dev/null | wc -l)
+count=$((new + unseen))
+
+[ "$count" -eq 0 ] && exit 0
+
+printf "\uf42f %s" "$count"
