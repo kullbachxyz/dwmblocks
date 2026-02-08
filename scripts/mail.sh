@@ -1,5 +1,12 @@
 #!/bin/sh
 
+btn="${BLOCK_BUTTON:-$BUTTON}"
+if [ -n "$btn" ]; then
+	case "$btn" in
+		1) setsid -f "$TERMINAL" -e aerc ;;
+	esac
+fi
+
 MAIL_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/mail"
 
 # Count mail in new/ plus unseen mail in cur/ (no S flag)
