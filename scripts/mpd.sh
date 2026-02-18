@@ -1,5 +1,8 @@
 #!/bin/sh
 
+host="$(cat "$HOME/.config/mpd/active_host" 2>/dev/null)"
+[ -n "$host" ] && export MPD_HOST="$host"
+
 btn="${BLOCK_BUTTON:-$BUTTON}"
 if [ -n "$btn" ]; then
 	case "$btn" in
