@@ -1,29 +1,33 @@
 #!/bin/sh
-
-# Outputs: wifi= ethernet= disconnected= disabled=
-
+# dwmblocks module: Network status icon
+#
+# Left/Middle click (1/2): open nmtui in terminal
+#
+# Icons:
+#   󰖩: wifi connected
+#   : ethernet connected
+#   󰤯: wifi enabled but not connected
+#   󰖪: wifi disabled (rfkill blocked / unavailable)
 btn="${BLOCK_BUTTON:-$BUTTON}"
 if [ -n "$btn" ]; then
 	case "$btn" in
 		1|2) setsid -f "$TERMINAL" -e nmtui ;;
 	esac
 fi
-
-if command -v rfkill >/dev/null 2>&1; then
-	if rfkill list wifi 2>/dev/null | grep -q 'Soft blocked: yes'; then
-		printf '%s' ""
-		exit 0
-	fi
-fi
-
+# Get the default route interface
 iface=$(ip route show default 2>/dev/null | awk 'NR==1{print $5}')
-if [ -z "$iface" ]; then
-	printf '%s' ""
-	exit 0
-fi
-
-if [ -d "/sys/class/net/$iface/wireless" ]; then
-	printf '%s' ""
+if [ -n "$iface" ]; then
+	# Connected — determine wifi or ethernet
+	if [ -d "/sys/class/net/$iface/wireless" ]; then
+		printf '%s' ""
+	else
+		printf '%s' ""
+	fi
 else
-	printf '%s' ""
+	# Not connected — check wifi radio state via nmcli
+	wifi_state=$(nmcli -t -f TYPE,STATE dev 2>/dev/null | grep '^wifi:' | head -1 | cut -d: -f2)
+	case "$wifi_state" in
+		disconnected) printf '%s' "󰤯" ;;
+		*)            printf '%s' "󰖪" ;;
+	esac
 fi
