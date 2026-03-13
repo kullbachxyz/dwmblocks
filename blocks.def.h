@@ -6,8 +6,7 @@ static const Block blocks[] = {
 	{"", "sb-mail",		60,	6},
 	{"", "sb-mpd",		5,	5},
 
-	{"", "sb-volume",	1,	8},   // 🔊 speaker volume
-	{"", "sb-mic",		1,	9},   // 🎙️ mic status
+	{"", "sb-volume",	1,	8},
 
 	{"", "sb-battery",	30,	3},
 	{"", "sb-clock",	60,	4},
