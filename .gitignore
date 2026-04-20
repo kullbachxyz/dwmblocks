@@ -1,0 +1,4 @@
+*.o
+*.orig
+dwmblocks
+blocks.h
