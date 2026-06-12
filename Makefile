@@ -19,7 +19,7 @@ options:
 dwmblocks: dwmblocks.c blocks.def.h blocks.h
 	${CC} -o dwmblocks dwmblocks.c ${CFLAGS} ${LDFLAGS}
 
-blocks.h:
+blocks.h: blocks.def.h
 	cp blocks.def.h $@
 
 clean:
