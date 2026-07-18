@@ -104,7 +104,7 @@ void getsigcmds(unsigned int signal)
 
 void setupsignals()
 {
-	struct sigaction sa = { .sa_sigaction = sighandler, .sa_flags = SA_SIGINFO };
+	struct sigaction sa = { .sa_sigaction = sighandler, .sa_flags = SA_SIGINFO | SA_RESTART };
 #ifndef __OpenBSD__
 	    /* initialize all real time signals with dummy handler */
     for (int i = SIGRTMIN; i <= SIGRTMAX; i++) {
